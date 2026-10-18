@@ -1,59 +1,78 @@
-# CursaProd
+# 🚀 Шпаргалка по Angular & Git
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.27.
+---
 
-## Development server
+## 🛠 Запуск и сборка
 
-To start a local development server, run:
+- `ng serve` (или `npm start`) — запустить локальный сервер для разработки (обычно `http://localhost:4200`).
+- `ng serve --open` (или `-o`) — запустить и сразу открыть в браузере.
+- `ng build` — собрать проект в прод (готовые оптимизированные файлы появятся в папке `dist/`).
+
+---
+
+## 📦 Генерация элементов (CLI)
+
+- `ng g c <имя>` — создать новый компонент (сокращение от `ng generate component`).
+  *Пример:* `ng g c header` (создаст папку `src/app/header/`).
+- `ng g s <имя>` — создать сервис для работы с данными/API (`ng generate service`).
+
+---
+
+## 📂 Что внутри папки компонента?
+
+Каждый блок/компонент состоит из 4 файлов:
+
+| Файл | За что отвечает |
+| :--- | :--- |
+| `name.component.ts` (или `.ts`) | **Логика**: переменные, функции, массивы данных, настройки селектора |
+| `name.component.html` (или `.html`) | **Разметка**: каркас HTML, кнопки, вывод данных |
+| `name.component.scss` (или `.scss`) | **Стили**: CSS/SCSS, изолированные только для этого блока |
+| `name.component.spec.ts` | **Тесты**: файл для автотестов (можно не трогать) |
+
+---
+
+## 🧩 Базовые правила Angular (Standalone)
+
+### 1. Как подключить один блок в другой:
+1. В `.ts` файле родителя импортируй класс:
+   `import { HeaderComponent } from './header/header.component';`
+2. Добавь его в список импортов:
+   `@Component({ ..., imports: [HeaderComponent] })`
+3. В `.html` родителя вставь тег-селектор:
+   `<app-header></app-header>`
+
+### 2. Главные синтаксические фишки в HTML:
+- `{{ title }}` — вывести значение переменной из `.ts`.
+- `(click)="myFunction()"` — реакция на клик.
+- `[src]="imageUrl"` — привязка значения к атрибуту.
+- `@for (item of items; track item.id) { ... }` — цикл для вывода списков/карточек.
+- `@if (isLoaded) { ... } @else { ... }` — условие отображения.
+
+---
+
+## 🗂 Главные файлы в корне `src/`
+
+- `index.html` — единственная точка входа HTML для браузера (содержит `<app-root></app-root>`, почти не редактируется).
+- `styles.scss` — **глобальные** стили для всего сайта (шрифты, сброс стилей, общие переменные).
+- `app.routes.ts` — настройка переключения страниц и маршрутов URL.
+- `app.config.ts` — глобальная конфигурация приложения.
+
+---
+
+## 🐙 Git шпаргалка
 
 ```bash
-ng serve
-```
+# 1. Проверить статус файлов
+git status
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+# 2. Добавить все изменения
+git add .
 
-## Code scaffolding
+# 3. Сделать коммит
+git commit -m "feat: добавил компонент header"
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+# 4. Отправить на GitHub
+git push
 
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+# 5. Подтянуть свежие изменения с GitHub
+git pull
